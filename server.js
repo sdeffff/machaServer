@@ -39,7 +39,7 @@ app.use(cors({
 app.use("/products/", shopRouter);
 app.use("/auth/", authRouter);
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 //Connecting to database using mongoose
 mongoose.connect(uri)
