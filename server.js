@@ -11,25 +11,24 @@ const uri = process.env.DB_ENV;
 
 const app = express(); 
 
-app.use(express.json({ limit: "10mb" })); 
-app.use(express.urlencoded({ limit: "10mb", extended: true })) 
-app.use(cookieParser());
-
 const allowedOrigins = ["http://localhost:4200", "https://macha-project.vercel.app"];
 
 app.use(cors({
     origin: function (origin, callback) {
-        if (!origin || allowedOrigins.includes(origin)) {
-          callback(null, true);
-        } else {
-          callback(new Error("Not allowed by CORS"));
-        }
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
     }, 
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'Content-Length', 'X-Requested-With'],
-    exposedHeaders: ['Set-Cookie'],
 }));
+
+app.use(cookieParser());
+app.use(express.json({ limit: "10mb" })); 
+app.use(express.urlencoded({ limit: "10mb", extended: true })) 
 
 //APIs for products pages
 app.use("/products/", shopRouter);
