@@ -102,7 +102,10 @@ router.get("/users", async(req, res) => {
 
 //POST API - logout the user:
 router.post("/logout", async (req, res) => {
-    res.clearCookie("authToken");
+    res.clearCookie("authToken", {
+        sameSite: 'none',
+        secure: true,
+    });
     res.status(200).json({ message: "Logged out successfully" });  
 })
 
