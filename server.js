@@ -2,8 +2,6 @@ const mongoose = require("mongoose");
 const express = require('express');
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-
-//Routers:
 const shopRouter = require("./routes/shopRouter");
 const authRouter = require("./routes/authRouter");
 
